@@ -11,8 +11,10 @@ public interface CouponRepository extends JpaRepository<Coupon, Integer>{
 
  	boolean existsCouponById(int id);
  	boolean existsCouponByTitle(String name);
- 	long deleteById(int idCompany);
 
+	@Query(value = "select * from coupons where company_id = :id", nativeQuery = true)
+	List<Integer> FindAllByCustomers_id(int id);
+	
 	@Query(value = "select * from customers_coupons where customer_id = :id", nativeQuery = true)
 	List<Integer> FindAllByCustomers_id(int id);
 }
